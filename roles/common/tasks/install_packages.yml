@@ -1,0 +1,16 @@
+# file: ./kibana/roles/common/tasks/install_packages.yml
+---
+- name: install epel repository
+  sudo: yes
+  yum: name="http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm" state=present
+
+- name: install yum packages
+  sudo: yes
+  yum: name={{ item }} state=latest
+  with_items:
+    - libselinux-python
+    - git
+    - unzip
+    - wget
+    - java-1.7.0-openjdk
+    - python-pip

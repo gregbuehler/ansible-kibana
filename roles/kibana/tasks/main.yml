@@ -1,0 +1,17 @@
+- name: make sure /var/www exists
+  sudo: yes
+  file: path=/var/www state=directory recurse=yes
+
+- name: download the latest kibana release
+  sudo: yes
+  get_url: url={{ kibana.url }} dest=/var/www/kibana.zip
+
+- name: extract kibana
+  sudo: yes
+  shell: pushd /var/www && unzip kibana.zip && mv kibana-latest kibana
+
+- name: ensure nginx config is in place
+  sudo: yes
+  template: src=kibana.conf.j2 dest=/etc/nginx/conf.d/kibana mode=0755
+  notify:
+    - restart nginx

@@ -1,0 +1,14 @@
+- name: install nginx repo
+  sudo: yes
+  copy: src=nginx.repo dest=/etc/yum.repos.d
+
+- name: install nginx
+  sudo: yes
+  yum: name=nginx state=latest
+
+- name: remove default configs
+  sudo: yes
+  file: path=/etc/nginx/conf.d/{{ item }} state=absent
+  with_items:
+    - default.conf
+    - example_ssl.conf

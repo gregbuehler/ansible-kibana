@@ -1,0 +1,25 @@
+---
+- name: ensure directories exist with correct permissions
+  sudo: yes
+  file: path={{ item }} recurse=yes owner=root group=root state=directory mode=0755
+  with_items:
+    - /opt/logstash
+    - /var/log/logstash
+
+- name: place logstash jar
+  sudo: yes
+  get_url: url={{ logstash.url }} dest=/opt/logstash/logstash.jar
+  notify:
+    - restart logstash
+
+- name: ensure configuartion file is in place
+  sudo: yes
+  template: src=logstash.conf.j2 dest=/opt/logstash/logstash.conf owner=root group=root mode=0644
+  notify:
+    - restart logstash
+
+- name: ensure init.d script is in place
+  sudo: yes
+  copy: src=logstash-init dest=/etc/init.d/logstash mode=0755
+  notify:
+    - restart logstash

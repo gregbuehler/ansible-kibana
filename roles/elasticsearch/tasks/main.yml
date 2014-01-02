@@ -1,0 +1,11 @@
+# file: ./kibana/roles/elasticsearch/tasks/main.yml
+---
+- name: install elasticsearch from elasticsearch.org rpm
+  sudo: yes
+  yum: name=https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.7.noarch.rpm state=present
+
+- name: template elasticsearch.yml
+  sudo: yes
+  template: src=elasticsearch.yml.j2  dest=/etc/elasticsearch/elasticsearch.yml
+  notify:
+    - restart elasticsearch

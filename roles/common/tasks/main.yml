@@ -1,0 +1,4 @@
+# file: ./kibana/roles/common/tasks/main.yml
+---
+- include: user_kibana.yml
+- include: install_packages.yml

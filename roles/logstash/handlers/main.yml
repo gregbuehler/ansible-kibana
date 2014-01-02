@@ -1,0 +1,13 @@
+# file: ./kibana/roles/logstash/handlers/main.yml
+---
+- name: start logstash
+  sudo: yes
+  service: name=logstash state=started enabled=yes
+
+- name: stop logstash
+  sudo: yes
+  service: name=logstash state=stopped enabled=yes
+
+- name: restart logstash
+  sudo: yes
+  service: name=logstash state=restarted  enabled=yes sleep=3

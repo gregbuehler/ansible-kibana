@@ -1,0 +1,13 @@
+- name: create kibana group
+  sudo: yes
+  group: name=kibana
+         system=yes
+         state=present
+
+- name: create kibana user
+  sudo: yes
+  user: name=kibana
+        group=kibana
+        createhome=no
+        shell=/bin/false
+        state=present

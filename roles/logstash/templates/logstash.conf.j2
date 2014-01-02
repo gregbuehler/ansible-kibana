@@ -1,0 +1,21 @@
+# logstash configuration
+
+input {
+    syslog {
+        debug => false
+        host => "0.0.0.0"
+        port => 5514
+        type => "linux-syslog"
+    }
+}
+filter {
+    grok {
+        type => "linux-syslog"
+        pattern => "%{SYSLOGLINE}"
+    }
+}
+output {
+    elasticsearch {
+        host => "127.0.0.1"
+    }
+}

@@ -1,0 +1,7 @@
+# file: ./kibana.yml
+---
+- hosts: all
+  vars_files:
+    - default_vars.yml
+  roles:
+    - kibana

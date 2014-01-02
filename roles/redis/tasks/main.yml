@@ -1,0 +1,5 @@
+# file: ./kibana/roles/common/tasks/main.yml
+---
+- name: install redis
+  sudo: yes
+  yum: name=redis state=latest
