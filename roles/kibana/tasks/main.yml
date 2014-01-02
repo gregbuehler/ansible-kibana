@@ -12,6 +12,6 @@
 
 - name: ensure nginx config is in place
   sudo: yes
-  template: src=kibana.conf.j2 dest=/etc/nginx/conf.d/kibana mode=0755
+  template: src=kibana.conf.j2 dest=/etc/nginx/conf.d/kibana.conf mode=0755
   notify:
     - restart nginx
